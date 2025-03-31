@@ -1,16 +1,31 @@
 import { useState, useEffect } from "react"
 import MediaCard from "../components/MediaCard"
+import { getproductos } from "../services/api";
 
 export default function Products(){
-    
-   const [productos, setProductos] = useState([])
-   useEffect(() => {
+   
+    const [productos, setProductos] = useState([])
+   
+//     useEffect(() => {
+//     async function fetchData() {
+//         const response = await fetch(`http://localhost:3000/productos`)
+//         try{
+//             if (!response.ok) throw new Error('Network response was not ok')
+//             const data = await response.json()
+//             setProductos(data)
+//         }catch(err){
+//             console.error('Error fetching data:', err)
+//         }
+//     }
+//     fetchData() //!LLAMARLA
+//    }, [])
+
+  
+useEffect(() => {
     async function fetchData() {
-        const response = await fetch(`http://localhost:3000/productos`)
         try{
-            if (!response.ok) throw new Error('Network response was not ok')
-            const data = await response.json()
-            setProductos(data)
+        const data = await getproductos()
+        setProductos(data)
         }catch(err){
             console.error('Error fetching data:', err)
         }
@@ -21,8 +36,6 @@ export default function Products(){
     // const productos1 = [
     //   { "id": 1, "nombre": "Laptop Gamer", "precio": 1500, "descripcion": "Laptop potente", "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTAeo-venJIrrE5Y_kMBEu3Wc3-B8CyfsfcA&s" },
     //   { "id": 2, "nombre": "Auriculares Bluetooth", "precio": 200, "descripcion": "Auriculares con cancelación de ruido", "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCBRAjBjJYY4Lbz1DYHN4WZh_xJikcKCuY1g&s" },
-    
-    
     // ]
 
     return (
@@ -34,7 +47,7 @@ export default function Products(){
                         <MediaCard 
                             key={producto.id}
                             producto={producto} 
-                            minWidthCard={400}
+                            minWidthCard={350}
                             heightImg={140}
                             btnLookDatail={true}
                         />

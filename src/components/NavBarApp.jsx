@@ -3,8 +3,12 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Link } from "react-router-dom";
+import { useCart } from '../context/CartContext'
+
+//!se requiere del contecto del carrito
 
 export default function NavBarApp() {
+  const {cart} = useCart()
     return (
         <header className="bg-white shadow-lg text-blue-600 w-full fixed z-10 top-0 py-4">
       
@@ -33,7 +37,8 @@ export default function NavBarApp() {
             <ul className="flex flex-row gap-4 p-4 font-bold text-[8px] sm:text-xs md:text-sm lg:text-base">
                   <li> <Link to="/" className="hover:underline"> Home </Link> </li>
                   <li> <Link to="/productos" className="hover:underline"> Productos </Link> </li>
-                  <li> <Link to="/carrito" className="hover:underline"> Tu Carrito 0 </Link> </li>
+                  <li> <Link to="/carrito" className="hover:underline"> Tu Carrito({cart.length})  </Link> </li>
+                  {/* <li> <Link to="/carrito" className="hover:underline"> Tu Carrito  </Link> </li> */}
               </ul>
           </nav>
           

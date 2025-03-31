@@ -7,16 +7,29 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
+import {useCart} from '../context/CartContext'
 
 export default function MediaCard({minWidthCard, heightImg, producto, btnLookDatail}) {
-  //esta funcion sera proveida por el contexto, por lo q ha dejado de ser PROP
-  const addToCart = () => {
-    alert('Producto agregado al carrito')}
-    //productos
+ const {addToCart} = useCart()
+  
+  //TODO: addToCart sera proveida por el contexto, por lo que dejo de ser PROP y es handleFunc.
+  
+  //const addToCart = (elProducto) => { alert(`El Producto "${elProducto.nombre}" agregado al carrito`)}
+  //? Notar que requiere parametro, al momento de llamarla hacerlo en una Arrow Func -> onClick={() => addToCart(producto)}
+  //Usar AF cuando necesitas pasar parámetros a la función manejadora, como "producto". La AF asegura que esto suceda solo al hacer clic
+  
+  
+  //? Parametro event + otros -> onClick={(e) => addToCart(e, producto)}
+  // Usa AF para pasar parametros adicionales junto con el objeto event, debes pasar ambos explícitamente. 
+  //!   const addToCart = (e, elProducto) => { 
+  //   alert(`El Producto "${elProducto.nombre}" agregado al carrito`)
+  //   console.log("el boton", e.target);
+  // }
+
+  //TODO: Agregar el estilo de cada card
     return (
       <Card sx={{ minWidth: minWidthCard || 300 }} 
-      className="p-4 m-4 hover:shadow-xl w-full max-w-[350px] min-w-[25%] min-h-[50vh] transition duration-300 transform hover:-translate-y-2"
+        className="p-4 m-4 w-full max-w-[350px] min-w-[25%] min-h-[50vh] hover:shadow-xl transition duration-300 transform hover:-translate-y-2"
       >
         
         <CardMedia
@@ -56,11 +69,22 @@ export default function MediaCard({minWidthCard, heightImg, producto, btnLookDat
 
         
         <CardActions>
-          <Button size="small" onClick={addToCart}>Comprar</Button>
-          { btnLookDatail  &&
-            <Button size="small">Ver detalle</Button>
+          <Button size="small"
+            variant='contained'
+            color='primary'
+            onClick={() => addToCart(producto)}>Comprar</Button>
+          
+      
+          {btnLookDatail && 
+            <Link to={`/producto/${producto.id}` }> 
+              <Button size="small" variant='outlined'>
+                <i className="text-blue-500 hover:underline m-2 block">Ver Detalles</i> 
+              </Button>
+            </Link>
           }
+
         </CardActions>
+
       </Card>
     );
   }

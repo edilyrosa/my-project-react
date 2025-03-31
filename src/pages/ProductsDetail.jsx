@@ -1,8 +1,39 @@
 import MediaCard from "../components/MediaCard"
-
+import { useState, useEffect } from "react"
+import {useParams} from "react-router-dom"
+import { getproductoById} from "../services/api";
 export default function Products(){
 
-    const producto =  { "id": 1, "nombre": "Laptop Gamer", "precio": 1500, "descripcion": "Laptop potente", "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTAeo-venJIrrE5Y_kMBEu3Wc3-B8CyfsfcA&s" }
+    const [producto, setProducto] = useState({})
+    const {id} =  useParams() 
+//     useEffect(() => {
+//     async function fetchData() {
+//         try{
+//             const response = await fetch(`http://localhost:3000/productos/${id}`)
+//             if (!response.ok) throw new Error('Network response was not ok')
+//             const data = await response.json()
+//             setProducto(data)
+//         }catch(err){
+//             console.error('Error fetching data:', err)
+//         }
+//     }
+//     fetchData() //!LLAMARLA
+//    }, [])
+
+  
+    useEffect(() => {
+    async function fetchData() {
+        try{
+        const data = await getproductoById(id)
+        setProducto(data)
+        }catch(err){
+            console.error('Error fetching data:', err)
+        }
+    }
+    fetchData() //!LLAMARLA
+   }, [])
+
+    //const producto =  { "id": 1, "nombre": "Laptop Gamer", "precio": 1500, "descripcion": "Laptop potente", "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTAeo-venJIrrE5Y_kMBEu3Wc3-B8CyfsfcA&s" }
 
     return (
       <div className="container mx-auto p-4 pt-40">
