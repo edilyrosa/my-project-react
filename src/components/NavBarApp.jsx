@@ -22,15 +22,14 @@ export default function NavBarApp() {
          </div>
           
 
-            <div className="flex gap-2 items-center">
-
-         <Box sx={{ width: 500, maxWidth: '100%' }}>
-            <TextField fullWidth label="Buscar Productos" id="fullWidth" />
-        </Box>
-        <button >
-            <FaSearch className="text-gray-500 text-4xl hover:text-blue-500" />
-        </button>
-            </div>
+            {/* <div className="flex gap-2 items-center">
+              <Box sx={{ width: 500, maxWidth: '100%' }}>
+                  <TextField fullWidth label="Buscar Productos" id="fullWidth" />
+              </Box>
+              <button >
+                  <FaSearch className="text-gray-500 text-4xl hover:text-blue-500" />
+              </button>
+            </div> */}
 
           
           <nav >

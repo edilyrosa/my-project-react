@@ -80,7 +80,7 @@ const { cart, removeFromCart, updateQuantity, getCartTotal} = useCart();
             {/*//! cantidad hardcodeada */}
             <div className="flex justify-between items-center mb-4">
                 <span className="text-lg font-semibold">Total:</span>
-                <span className="text-xl font-bold">${getCartTotal()}</span>
+                <span className="text-xl font-bold">${getCartTotal().toFixed(2)}</span>
             </div>
 
         </div>

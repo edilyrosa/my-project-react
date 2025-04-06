@@ -44,6 +44,9 @@ export default function MediaCard({minWidthCard, heightImg, producto, btnLookDat
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
             {producto.descripcion}
           </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            {producto.precio}
+          </Typography>
         </CardContent>
         
         <CardContent>
