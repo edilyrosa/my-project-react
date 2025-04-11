@@ -1,28 +1,25 @@
 import { useState } from "react";
-//import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const [username, setUsername] = useState("");
+  const [userEmail, setUserEmail] = useState('') 
   const [password, setPassword] = useState("");
-  //const { login } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
 
+  //!Func async que obtiene el resultado (true || false) y redirige navegacion y alert().
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-   // const result = await login(username, password); // Realiza el login con el username y password
-    //!login() Busca en la db al usuario que esta intentado hacer login, y retorna un OBJ ->
-    //!return { success: true, user: loggedInUser }
-    //!return { success: false, message: "Usuario o contraseña incorrectos." };
+    const result = await login(userEmail, password);
     
-    // if (result.success) {
-    //   navigate("/productos");
-    // } else {
-    //   alert(result.message); // Si no es exitoso, muestra el mensaje de error
-    // }
+    if (result.success) {
+      alert(`Loing exitoso de ${result.user.userEmail}, id=${result.user.id}`);
+      navigate("/productos");
+    } else {
+      alert(result.message); // Si no es exitoso, muestra el mensaje de error desde la API
+    }
 
-    alert('usuario hizo Loing')
   };
 
   return (
@@ -33,9 +30,9 @@ export default function Login() {
         <label className="block mb-2">
           Usuario:
           <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            value={userEmail}
+            onChange={(e) => setUserEmail(e.target.value)}
             className="w-full p-2 border rounded mt-1"
             required
           />

@@ -2,7 +2,6 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { FaCreditCard } from "react-icons/fa";
-//import Lista from '../components/ListaPractica'; 
 import Lista from '../components/Lista';
 import Button from '@mui/material/Button';
 import { useCart } from '../context/CartContext';
@@ -10,13 +9,7 @@ export default function Checkout(){
   
   const { clearCart, getCartTotal } = useCart();
 
-  
-
   const navigate = useNavigate();
-//  const clearCart = () => {
-//     alert("Carrito vaciado");
-//   };
-
   const handlePayment = () => {
     alert("Compra realizada con éxito 🎉");
     clearCart();
@@ -28,9 +21,6 @@ export default function Checkout(){
              <div className="container mx-auto p-4 pt-40">
                      <h1 className="text-5xl">Soy Checkout</h1>
   
-                     
-                
-                       
                    <div className='flex flex-col md:flex-row gap-8'>
                      <div className='md:w-2/3'>
                       <Lista 
@@ -81,30 +71,10 @@ export default function Checkout(){
                         </div>
 
                       </div>
-                     
                     
                    </div>
-                     
-                    
-                          
-                            
- 
-
-                     
-                          
-                          
-                        {/*//TODO: LA DIV LATETAL HERMANA  <div className="md:w-1/3"> */}
-                          
-                            
-
-                      
-               
-
-
-            </div>
-        
-          
-          
+   
+            </div>    
         
     )
 }

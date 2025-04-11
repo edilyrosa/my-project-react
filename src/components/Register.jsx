@@ -1,21 +1,23 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-//import { register } from '../context/CartContext' //!debe ser del AuthContext
-//import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext"; //TODO
 
 export default function Register() {
-    const [userName, setUserName] = useState('edily')
+    //const [userName, setUserName] = useState('edily')
+    const [userEmail, setUserEmail] = useState('') //TODO
     const [password, setPassword] = useState('')
-   // const navigate = useNavigate()
+    const navigate = useNavigate() //TODO
+    const {register} = useAuth() //TODO
 
-const handleSubmit =  (e) => {
-    e.preventDefault();
-    //TODO: const result = register(userName, password) 
-    // if(result.success) navigate('/productos')
-    // else alert(result.message)
-
-    alert('form enviado')
-}
+    const handleSubmit =  async (e) => {
+        e.preventDefault();
+        const result = await register(userEmail, password) //TODO
+        if(result.success) {
+            alert(`Registro exitoso de ${result.user.userEmail} y ${result.user.id}`)
+            navigate('/productos')
+        }
+        else alert(result.message)
+    }
 
 
     return(
@@ -29,10 +31,11 @@ const handleSubmit =  (e) => {
             >
 
                 <input
-                    type="text"
-                    placeholder="UserName"
+                    type="email"
+                    placeholder="userEmail"
                     className="w-full p-2 border border-gray-300 rounded-md"
-                    onChange={(e) => setUserName(e.target.value)}
+                    value={userEmail}
+                    onChange={(e) => setUserEmail(e.target.value)}
                 />
                 <input
                     type="password"
@@ -58,8 +61,7 @@ const handleSubmit =  (e) => {
                 </Link> 
             </p>
             </div>
-
-
+            
         </div>
     )
     

@@ -1,4 +1,3 @@
-import { FaShoppingCart } from "react-icons/fa"; // Importar icono del carrito para el btn "Comprar"
 import { Link } from "react-router-dom"; //para redireccion a esa vista al evento onClick del btn
 import * as React from 'react';
 import Card from '@mui/material/Card';
@@ -7,26 +6,15 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import {useCart} from '../context/CartContext'
+import {useCart} from '../context/CartContext' 
+import {useAuth} from '../context/AuthContext' 
+import { useNavigate } from "react-router-dom";
 
 export default function MediaCard({minWidthCard, heightImg, producto, btnLookDatail}) {
  const {addToCart} = useCart()
+ const { isAuthenticated} = useAuth()
+ const navigate = useNavigate();
   
-  //TODO: addToCart sera proveida por el contexto, por lo que dejo de ser PROP y es handleFunc.
-  
-  //const addToCart = (elProducto) => { alert(`El Producto "${elProducto.nombre}" agregado al carrito`)}
-  //? Notar que requiere parametro, al momento de llamarla hacerlo en una Arrow Func -> onClick={() => addToCart(producto)}
-  //Usar AF cuando necesitas pasar parámetros a la función manejadora, como "producto". La AF asegura que esto suceda solo al hacer clic
-  
-  
-  //? Parametro event + otros -> onClick={(e) => addToCart(e, producto)}
-  // Usa AF para pasar parametros adicionales junto con el objeto event, debes pasar ambos explícitamente. 
-  //!   const addToCart = (e, elProducto) => { 
-  //   alert(`El Producto "${elProducto.nombre}" agregado al carrito`)
-  //   console.log("el boton", e.target);
-  // }
-
-  //TODO: Agregar el estilo de cada card
     return (
       <Card sx={{ minWidth: minWidthCard || 300 }} 
         className="p-4 m-4 w-full max-w-[350px] min-w-[25%] min-h-[50vh] hover:shadow-xl transition duration-300 transform hover:-translate-y-2"
@@ -75,7 +63,12 @@ export default function MediaCard({minWidthCard, heightImg, producto, btnLookDat
           <Button size="small"
             variant='contained'
             color='primary'
-            onClick={() => addToCart(producto)}>Comprar</Button>
+            onClick={() => {
+              !isAuthenticated &&  navigate("/login");
+              addToCart(producto)
+            }
+            
+            }>Comprar</Button>
           
       
           {btnLookDatail && 

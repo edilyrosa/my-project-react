@@ -3,15 +3,6 @@ import { useCart } from "../context/CartContext";
 export default function Lista ({showActions=true, bigSize=true}) {
 const { cart, removeFromCart, updateQuantity, getCartTotal} = useCart();
 
-// const cart = [
-//     { "id": 1, "nombre": "Laptop Gamer", "precio": 1500, "descripcion": "Laptop potente", "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTAeo-venJIrrE5Y_kMBEu3Wc3-B8CyfsfcA&s" },
-//     { "id": 2, "nombre": "Auriculares Bluetooth", "precio": 200, "descripcion": "Auriculares con cancelación de ruido", "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCBRAjBjJYY4Lbz1DYHN4WZh_xJikcKCuY1g&s" },
-// ]
-// const removeFromCart = () => { alert(`El Producto eliminado del carrito`)}
-// const updateQuantity = () => { alert(`Cantidad del Producto en el carrito CAMBIO`)}
-// function getCartTotal() {return  "1000"}
-
-
     return (
         <div className="rounded-lg shadow-md p-6">
     
@@ -77,7 +68,6 @@ const { cart, removeFromCart, updateQuantity, getCartTotal} = useCart();
                 </div>
             ))}
 
-            {/*//! cantidad hardcodeada */}
             <div className="flex justify-between items-center mb-4">
                 <span className="text-lg font-semibold">Total:</span>
                 <span className="text-xl font-bold">${getCartTotal().toFixed(2)}</span>
